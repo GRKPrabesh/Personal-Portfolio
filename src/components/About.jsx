@@ -38,7 +38,7 @@ export default function About() {
             {[
               { label: "Focus", value: "Business Development", icon: "📈" },
               { label: "Also", value: "Software Developer", icon: "💻" },
-              { label: "Status", value: "BDE @ PCPS College", icon: "�" },
+              
               { label: "Location", value: personalInfo.location, icon: "🌏" },
             ].map((item, i) => (
               <motion.div key={item.label}

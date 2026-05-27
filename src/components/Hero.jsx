@@ -67,7 +67,7 @@ export default function Hero() {
               letterSpacing: "0.1em", textTransform: "uppercase", marginBottom: 28,
             }}>
               <span style={{ width: 6, height: 6, borderRadius: "50%", background: "#7c3aed", animation: "pulse-glow 2s ease-in-out infinite", display: "inline-block" }} />
-              BDE · Patan College for Professional Studies
+             
             </span>
           </motion.div>
 

@@ -20,6 +20,10 @@ export const skills = [
   { category: "Backend", items: ["Node.js", "Express", "Servlet", "JSP"] },
   { category: "Database", items: ["MySQL", "MongoDB"] },
   { category: "Tools", items: ["Git", "Web Scraping", "JavaFX"] },
+   {
+    category: "Professional Skills",
+    items: ["Branding", "Marketing", "Counselling"],
+  },
 ];
 
 export const skillBars = [
