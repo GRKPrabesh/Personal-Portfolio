@@ -1,28 +1,27 @@
 import { useState, useEffect } from "react";
 
 const navLinks = [
-  { label: "About", href: "#about" },
-  { label: "Skills", href: "#skills" },
-  { label: "Projects", href: "#projects" },
-  { label: "Experience", href: "#experience" },
+  { label: "About",          href: "#about" },
+  { label: "Skills",         href: "#skills" },
+  { label: "Projects",       href: "#projects" },
+  { label: "Experience",     href: "#experience" },
   { label: "Certifications", href: "#certifications" },
-  { label: "Contact", href: "#contact" },
+  { label: "Contact",        href: "#contact" },
 ];
 
-export default function Navbar() {
-  const [scrolled, setScrolled] = useState(false);
-  const [menuOpen, setMenuOpen] = useState(false);
-  const [active, setActive] = useState("");
+export default function Navbar({ onResumeClick }) {
+  const [scrolled,  setScrolled]  = useState(false);
+  const [menuOpen,  setMenuOpen]  = useState(false);
+  const [active,    setActive]    = useState("");
 
   useEffect(() => {
     const onScroll = () => {
       setScrolled(window.scrollY > 60);
-      const sections = navLinks.map(l => l.href.slice(1));
-      for (let i = sections.length - 1; i >= 0; i--) {
-        const el = document.getElementById(sections[i]);
+      const ids = navLinks.map(l => l.href.slice(1));
+      for (let i = ids.length - 1; i >= 0; i--) {
+        const el = document.getElementById(ids[i]);
         if (el && window.scrollY >= el.offsetTop - 120) {
-          setActive("#" + sections[i]);
-          break;
+          setActive("#" + ids[i]); break;
         }
       }
     };
@@ -30,73 +29,66 @@ export default function Navbar() {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  const handleNav = (e, href) => {
+  const go = (e, href) => {
     e.preventDefault();
     setMenuOpen(false);
     document.querySelector(href)?.scrollIntoView({ behavior: "smooth" });
   };
 
   return (
-    <nav style={{
-      position: "fixed", top: 0, left: 0, right: 0, zIndex: 100,
-      transition: "all 0.4s ease",
-      padding: scrolled ? "12px 0" : "20px 0",
-      background: scrolled ? "rgba(5,5,16,0.85)" : "transparent",
-      backdropFilter: scrolled ? "blur(20px)" : "none",
-      borderBottom: scrolled ? "1px solid rgba(124,58,237,0.1)" : "none",
-    }}>
-      <div style={{ maxWidth: 1140, margin: "0 auto", padding: "0 28px", display: "flex", alignItems: "center", justifyContent: "space-between" }}>
-        <a href="#hero" onClick={e => handleNav(e, "#hero")} style={{ textDecoration: "none", display: "flex", alignItems: "center", gap: 1 }}>
-          <span style={{ fontSize: 16, fontWeight: 800, background: "linear-gradient(135deg, #a78bfa, #06b6d4)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent" }}>
-            Prabesh Kattel
-          </span>
-          <span style={{ color: "#7c3aed", fontSize: 22, fontWeight: 900, lineHeight: 1, marginLeft: 1 }}>.</span>
+    <nav className={`navbar${scrolled ? " navbar--scrolled" : ""}`}>
+      <div className="navbar-inner">
+        {/* Logo */}
+        <a href="#hero" onClick={e => go(e, "#hero")} className="navbar-logo">
+          Prabesh Kattel<span className="navbar-logo-dot">.</span>
         </a>
 
-        <ul style={{ display: "flex", alignItems: "center", gap: 28, listStyle: "none" }} className="nav-desktop-links">
+        {/* Desktop links */}
+        <ul className="nav-desktop-links">
           {navLinks.map(link => (
             <li key={link.href}>
-              <a href={link.href} onClick={e => handleNav(e, link.href)} style={{
-                textDecoration: "none", fontSize: 13, fontWeight: 500,
-                color: active === link.href ? "#a78bfa" : "#94a3b8",
-                transition: "color 0.2s",
-                position: "relative",
-              }}
-                onMouseEnter={e => e.target.style.color = "#e2e8f0"}
-                onMouseLeave={e => e.target.style.color = active === link.href ? "#a78bfa" : "#94a3b8"}
-              >{link.label}</a>
+              <a href={link.href} onClick={e => go(e, link.href)}
+                className={`nav-link${active === link.href ? " nav-link--active" : ""}`}>
+                {link.label}
+              </a>
             </li>
           ))}
+          <li>
+            <button onClick={onResumeClick} className="nav-resume-btn">
+              Resume
+            </button>
+          </li>
         </ul>
 
-        <button className="nav-hamburger" onClick={() => setMenuOpen(!menuOpen)} aria-label="Toggle menu"
-          style={{ background: "none", border: "none", cursor: "pointer", padding: 8, display: "flex", flexDirection: "column", gap: 5 }}>
+        {/* Hamburger */}
+        <button className="nav-hamburger" onClick={() => setMenuOpen(o => !o)} aria-label="Toggle menu">
           {[0, 1, 2].map(i => (
-            <span key={i} style={{
-              display: "block", width: 22, height: 2, borderRadius: 2,
-              background: "linear-gradient(90deg, #7c3aed, #06b6d4)",
-              transition: "all 0.3s",
-              transform: menuOpen ? (i === 0 ? "rotate(45deg) translate(5px,5px)" : i === 2 ? "rotate(-45deg) translate(5px,-5px)" : "none") : "none",
+            <span key={i} className="nav-bar" style={{
+              transform: menuOpen
+                ? i === 0 ? "rotate(45deg) translate(5px,5px)"
+                : i === 2 ? "rotate(-45deg) translate(5px,-5px)" : "none"
+                : "none",
               opacity: menuOpen && i === 1 ? 0 : 1,
             }} />
           ))}
         </button>
       </div>
 
-      <div className="nav-mobile-menu" style={{
-        overflow: "hidden", maxHeight: menuOpen ? 400 : 0,
-        transition: "max-height 0.35s ease",
-        background: "rgba(5,5,16,0.97)", backdropFilter: "blur(20px)",
-      }}>
-        <ul style={{ listStyle: "none", padding: "16px 28px 24px", display: "flex", flexDirection: "column", gap: 16 }}>
+      {/* Mobile menu */}
+      <div className="nav-mobile-menu" style={{ maxHeight: menuOpen ? 480 : 0 }}>
+        <ul className="nav-mobile-list">
           {navLinks.map(link => (
             <li key={link.href}>
-              <a href={link.href} onClick={e => handleNav(e, link.href)}
-                style={{ textDecoration: "none", fontSize: 15, fontWeight: 500, color: "#cbd5e1" }}>
+              <a href={link.href} onClick={e => go(e, link.href)} className="nav-mobile-link">
                 {link.label}
               </a>
             </li>
           ))}
+          <li>
+            <button onClick={() => { setMenuOpen(false); onResumeClick(); }} className="nav-mobile-resume">
+              📄 View Resume
+            </button>
+          </li>
         </ul>
       </div>
     </nav>

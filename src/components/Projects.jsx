@@ -1,5 +1,4 @@
-import { useRef } from "react";
-import { motion, useInView } from "framer-motion";
+import { motion } from "framer-motion";
 import { projects } from "../data/constants";
 
 const GithubIcon = () => (
@@ -8,74 +7,58 @@ const GithubIcon = () => (
   </svg>
 );
 
-function ProjectCard({ project, index, inView }) {
-  const colors = ["#7c3aed", "#06b6d4", "#7c3aed"];
-  const c = colors[index % colors.length];
+const accentColors = ["#7c3aed", "#06b6d4", "#7c3aed"];
+
+function ProjectCard({ project, index }) {
+  const c = accentColors[index % accentColors.length];
+  const c2 = c === "#7c3aed" ? "#06b6d4" : "#7c3aed";
 
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 32 }}
-      animate={inView ? { opacity: 1, y: 0 } : {}}
-      transition={{ duration: 0.55, delay: index * 0.12 }}
-      style={{
-        background: "rgba(255,255,255,0.025)", borderRadius: 24, padding: 28,
-        display: "flex", flexDirection: "column", position: "relative", overflow: "hidden",
-        transition: "all 0.3s", cursor: "default",
-        border: "1px solid rgba(255,255,255,0.05)",
-      }}
-      onMouseEnter={e => { e.currentTarget.style.background = "rgba(124,58,237,0.07)"; e.currentTarget.style.transform = "translateY(-6px)"; e.currentTarget.style.borderColor = "rgba(124,58,237,0.25)"; e.currentTarget.style.boxShadow = "0 20px 50px rgba(124,58,237,0.15)"; }}
-      onMouseLeave={e => { e.currentTarget.style.background = "rgba(255,255,255,0.025)"; e.currentTarget.style.transform = "translateY(0)"; e.currentTarget.style.borderColor = "rgba(255,255,255,0.05)"; e.currentTarget.style.boxShadow = "none"; }}
-    >
-      {/* Top gradient bar */}
-      <div style={{ position: "absolute", top: 0, left: 0, right: 0, height: 3, background: `linear-gradient(90deg, ${c}, ${c === "#7c3aed" ? "#06b6d4" : "#7c3aed"})`, borderRadius: "24px 24px 0 0" }} />
+    <motion.div className="project-card"
+      initial={{ opacity: 0, y: 36 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, margin: "-40px" }}
+      transition={{ duration: 0.55, delay: index * 0.1 }}
+      whileHover={{ y: -8, boxShadow: "0 24px 60px rgba(124,58,237,0.18)" }}>
+      {/* Top bar */}
+      <div style={{ position: "absolute", top: 0, left: 0, right: 0, height: 3,
+        background: `linear-gradient(90deg, ${c}, ${c2})`, borderRadius: "20px 20px 0 0" }} />
+      {/* Index watermark */}
+      <span className="project-index">{String(index + 1).padStart(2, "0")}</span>
 
-      <span style={{ position: "absolute", top: 18, right: 20, fontSize: 44, fontWeight: 900, color: "rgba(124,58,237,0.07)", lineHeight: 1, userSelect: "none" }}>
-        {String(index + 1).padStart(2, "0")}
-      </span>
+      <h3 className="project-title">{project.title}</h3>
+      <p className="project-desc">{project.description}</p>
 
-      <h3 style={{ fontSize: 17, fontWeight: 700, color: "#fff", marginBottom: 10, paddingRight: 44, marginTop: 8 }}>{project.title}</h3>
-      <p style={{ fontSize: 13, color: "#64748b", lineHeight: 1.75, marginBottom: 20, flex: 1 }}>{project.description}</p>
-
-      <div style={{ display: "flex", flexWrap: "wrap", gap: 7, marginBottom: 20 }}>
-        {project.tech.map(t => (
-          <span key={t} style={{ padding: "4px 11px", borderRadius: 100, background: "rgba(124,58,237,0.1)", color: "#a78bfa", fontSize: 11, fontWeight: 600, border: "1px solid rgba(124,58,237,0.15)" }}>{t}</span>
-        ))}
+      <div className="chip-row" style={{ marginBottom: 20 }}>
+        {project.tech.map(t => <span key={t} className="chip">{t}</span>)}
       </div>
 
       {project.github && (
-        <a href={project.github} target="_blank" rel="noopener noreferrer"
-          style={{ display: "inline-flex", alignItems: "center", gap: 6, color: "#475569", fontSize: 13, fontWeight: 500, textDecoration: "none", transition: "color 0.2s" }}
-          onMouseEnter={e => e.currentTarget.style.color = "#a78bfa"}
-          onMouseLeave={e => e.currentTarget.style.color = "#475569"}>
+        <motion.a href={project.github} target="_blank" rel="noopener noreferrer"
+          className="project-link" whileHover={{ color: "#a78bfa", x: 3 }}>
           <GithubIcon /> View on GitHub
-        </a>
+        </motion.a>
       )}
     </motion.div>
   );
 }
 
 export default function Projects() {
-  const ref = useRef(null);
-  const inView = useInView(ref, { once: true, margin: "-80px" });
-
   return (
-    <section id="projects" ref={ref} style={{ padding: "120px 0", background: "#050510", position: "relative", overflow: "hidden" }}>
-      <div style={{ position: "absolute", top: "20%", right: "-8%", width: 400, height: 400, background: "radial-gradient(circle, rgba(6,182,212,0.06) 0%, transparent 70%)", borderRadius: "50%", pointerEvents: "none" }} />
+    <section id="projects" className="section section--dark">
+      <div className="section-bg-orb" style={{ top: "20%", right: "-8%", background: "radial-gradient(circle, rgba(6,182,212,0.06) 0%, transparent 70%)" }} />
 
-      <div style={{ maxWidth: 1140, margin: "0 auto", padding: "0 28px" }}>
-        <motion.div initial={{ opacity: 0, y: 20 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.55 }}
-          style={{ textAlign: "center", marginBottom: 72 }}>
-          <span style={{ display: "inline-block", padding: "5px 16px", borderRadius: 100, background: "rgba(124,58,237,0.1)", border: "1px solid rgba(124,58,237,0.2)", color: "#a78bfa", fontSize: 11, fontWeight: 600, letterSpacing: "0.12em", textTransform: "uppercase", marginBottom: 14 }}>
-            What I&apos;ve built
-          </span>
-          <h2 style={{ fontSize: "clamp(30px, 5vw, 48px)", fontWeight: 800, color: "#fff", letterSpacing: "-0.5px", marginBottom: 14 }}>
-            My <span style={{ background: "linear-gradient(135deg, #a78bfa, #06b6d4)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent" }}>Projects</span>
-          </h2>
-          <p style={{ fontSize: 14, color: "#475569", maxWidth: 420, margin: "0 auto" }}>A selection of projects across web development, databases, and desktop apps.</p>
+      <div className="container">
+        <motion.div className="section-header"
+          initial={{ opacity: 0, y: 24 }} whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }} transition={{ duration: 0.55 }}>
+          <span className="section-badge">What I&apos;ve built</span>
+          <h2 className="section-title">My <span className="gradient-text">Projects</span></h2>
+          <p className="section-sub">A selection of projects across web development, databases, and desktop apps.</p>
         </motion.div>
 
         <div className="projects-grid">
-          {projects.map((p, i) => <ProjectCard key={p.title} project={p} index={i} inView={inView} />)}
+          {projects.map((p, i) => <ProjectCard key={p.title} project={p} index={i} />)}
         </div>
       </div>
     </section>
