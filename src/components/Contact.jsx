@@ -32,46 +32,41 @@ export default function Contact() {
   const inView = useInView(ref, { once: true, margin: "-80px" });
   const [form, setForm] = useState({ name: "", email: "", message: "" });
   const [submitted, setSubmitted] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   const handleChange = e => setForm({ ...form, [e.target.name]: e.target.value });
 
- const handleSubmit = async (e) => {
-  e.preventDefault();
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setLoading(true);
 
-  try {
-    const res = await fetch("http://localhost:5000/send", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(form),
-    });
-
-    const data = await res.json();
-
-    if (res.ok) {
-      setSubmitted(true);
-
-      setTimeout(() => {
-        setSubmitted(false);
-      }, 4000);
-
-      setForm({
-        name: "",
-        email: "",
-        message: "",
+    try {
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(form),
       });
 
-    } else {
-      console.log(data);
-      alert("Failed to send message");
-    }
+      const data = await res.json();
 
-  } catch (err) {
-    console.log(err);
-    alert("Server connection failed");
-  }
-};
+      if (res.ok) {
+        setSubmitted(true);
+        setTimeout(() => setSubmitted(false), 4000);
+        setForm({ name: "", email: "", message: "" });
+      } else {
+        console.log(data);
+        alert("Failed to send message");
+      }
+    } catch (err) {
+      console.log(err);
+      alert("Server connection failed");
+    } finally {
+      setLoading(false);
+    }
+  };
+
   return (
     <section id="contact" ref={ref} style={{ padding: "120px 0", background: "#07071a", position: "relative", overflow: "hidden" }}>
       <div style={{ position: "absolute", top: "20%", left: "-5%", width: 400, height: 400, background: "radial-gradient(circle, rgba(124,58,237,0.07) 0%, transparent 70%)", borderRadius: "50%", pointerEvents: "none" }} />
@@ -141,7 +136,7 @@ export default function Contact() {
             <form onSubmit={handleSubmit}
               style={{ background: "linear-gradient(145deg, rgba(124,58,237,0.06), rgba(6,182,212,0.03))", borderRadius: 22, padding: 32, display: "flex", flexDirection: "column", gap: 18, border: "1px solid rgba(124,58,237,0.12)" }}>
               {[
-                { id: "name", label: "Your Name", type: "text", placeholder: "Prabesh Kattel" },
+                { id: "name", label: "Your Name", type: "text" },
                 { id: "email", label: "Your Email", type: "email", placeholder: "you@example.com" },
               ].map(({ id, label, type, placeholder }) => (
                 <div key={id}>
@@ -158,13 +153,13 @@ export default function Contact() {
                   onFocus={e => { e.target.style.background = "rgba(124,58,237,0.08)"; e.target.style.borderColor = "rgba(124,58,237,0.35)"; }}
                   onBlur={e => { e.target.style.background = "rgba(255,255,255,0.04)"; e.target.style.borderColor = "rgba(255,255,255,0.07)"; }} />
               </div>
-              <button type="submit"
-                style={{ padding: "14px", borderRadius: 12, background: "linear-gradient(135deg, #7c3aed, #06b6d4)", color: "#fff", fontWeight: 700, fontSize: 15, border: "none", cursor: "pointer", transition: "all 0.25s", fontFamily: "inherit", boxShadow: "0 4px 20px rgba(124,58,237,0.35)" }}
-                onMouseEnter={e => { e.target.style.transform = "translateY(-2px)"; e.target.style.boxShadow = "0 8px 30px rgba(124,58,237,0.5)"; }}
+              <button type="submit" disabled={loading}
+                style={{ padding: "14px", borderRadius: 12, background: "linear-gradient(135deg, #7c3aed, #06b6d4)", color: "#fff", fontWeight: 700, fontSize: 15, border: "none", cursor: loading ? "not-allowed" : "pointer", opacity: loading ? 0.7 : 1, transition: "all 0.25s", fontFamily: "inherit", boxShadow: "0 4px 20px rgba(124,58,237,0.35)" }}
+                onMouseEnter={e => { if (!loading) { e.target.style.transform = "translateY(-2px)"; e.target.style.boxShadow = "0 8px 30px rgba(124,58,237,0.5)"; }}}
                 onMouseLeave={e => { e.target.style.transform = "translateY(0)"; e.target.style.boxShadow = "0 4px 20px rgba(124,58,237,0.35)"; }}>
-                {submitted ? "✓ Message Sent!" : "Send Message →"}
+                {loading ? "Sending..." : submitted ? "✓ Message Sent!" : "Send Message →"}
               </button>
-              <p style={{ fontSize: 11, color: "#334155", textAlign: "center" }}>This will open your email client with the message pre-filled.</p>
+              <p style={{ fontSize: 11, color: "#334155", textAlign: "center" }}>I'll get back to you as soon as possible.</p>
             </form>
           </motion.div>
         </div>
