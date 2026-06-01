@@ -53,7 +53,7 @@ export default function Navbar() {
           <span style={{ color: "#7c3aed", fontSize: 22, fontWeight: 900, lineHeight: 1, marginLeft: 1 }}>.</span>
         </a>
 
-        <ul style={{ display: "flex", alignItems: "center", gap: 28, listStyle: "none" }} className="hidden md:flex">
+        <ul style={{ display: "flex", alignItems: "center", gap: 28, listStyle: "none" }} className="nav-desktop-links">
           {navLinks.map(link => (
             <li key={link.href}>
               <a href={link.href} onClick={e => handleNav(e, link.href)} style={{
@@ -69,7 +69,7 @@ export default function Navbar() {
           ))}
         </ul>
 
-        <button className="md:hidden" onClick={() => setMenuOpen(!menuOpen)} aria-label="Toggle menu"
+        <button className="nav-hamburger" onClick={() => setMenuOpen(!menuOpen)} aria-label="Toggle menu"
           style={{ background: "none", border: "none", cursor: "pointer", padding: 8, display: "flex", flexDirection: "column", gap: 5 }}>
           {[0, 1, 2].map(i => (
             <span key={i} style={{
@@ -83,7 +83,7 @@ export default function Navbar() {
         </button>
       </div>
 
-      <div className="md:hidden" style={{
+      <div className="nav-mobile-menu" style={{
         overflow: "hidden", maxHeight: menuOpen ? 400 : 0,
         transition: "max-height 0.35s ease",
         background: "rgba(5,5,16,0.97)", backdropFilter: "blur(20px)",

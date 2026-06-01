@@ -24,3 +24,104 @@ body {
 @keyframes spin-slow { from{transform:rotate(0deg)} to{transform:rotate(360deg)} }
 @keyframes shimmer { 0%{background-position:-200% center} 100%{background-position:200% center} }
 @keyframes pulse-glow { 0%,100%{box-shadow:0 0 20px rgba(124,58,237,0.3)} 50%{box-shadow:0 0 40px rgba(124,58,237,0.6), 0 0 80px rgba(6,182,212,0.2)} }
+
+/* ── Navbar ─────────────────────────────────────────────── */
+.nav-desktop-links { display: flex; }
+.nav-hamburger     { display: none; }
+.nav-mobile-menu   { display: block; }
+
+@media (max-width: 768px) {
+  .nav-desktop-links { display: none !important; }
+  .nav-hamburger     { display: flex !important; }
+}
+
+/* ── Responsive ─────────────────────────────────────────── */
+
+/* Tablet & below (≤ 900px) */
+@media (max-width: 900px) {
+  .projects-grid { grid-template-columns: repeat(2, 1fr) !important; }
+}
+
+/* Mobile (≤ 768px) */
+@media (max-width: 768px) {
+
+  /* Navbar desktop links hidden, hamburger shown */
+  .hidden.md\:flex { display: none !important; }
+  .md\:hidden { display: flex !important; }
+
+  /* Hero */
+  .hero-photo { display: none !important; }
+
+  section {
+    padding: 80px 0 !important;
+  }
+
+  /* About grid → single column */
+  .about-grid {
+    grid-template-columns: 1fr !important;
+    gap: 36px !important;
+  }
+
+  /* Skills grid → single column */
+  .skills-grid {
+    grid-template-columns: 1fr !important;
+  }
+
+  /* Contact grid → single column */
+  .contact-grid {
+    grid-template-columns: 1fr !important;
+  }
+
+  /* Footer → stack vertically */
+  footer > div {
+    flex-direction: column !important;
+    align-items: center !important;
+    text-align: center !important;
+    gap: 12px !important;
+  }
+
+  /* Hero stats → wrap nicely */
+  .hero-stats {
+    gap: 20px !important;
+    flex-wrap: wrap !important;
+  }
+
+  /* Hero buttons → stack on very small screens */
+  .hero-buttons {
+    flex-direction: column !important;
+    align-items: flex-start !important;
+  }
+
+  /* Experience timeline text */
+  .timeline-header {
+    flex-direction: column !important;
+    align-items: flex-start !important;
+  }
+
+  /* Certifications grid → single column */
+  .cert-grid {
+    grid-template-columns: 1fr !important;
+  }
+
+  /* General padding fix for all sections */
+  [style*="padding: 120px 0"] {
+    padding: 72px 0 !important;
+  }
+
+  [style*="padding: \"0 28px\""] {
+    padding: 0 16px !important;
+  }
+}
+
+/* Small mobile (≤ 480px) */
+@media (max-width: 480px) {
+  .projects-grid { grid-template-columns: 1fr !important; }
+  .cert-grid { grid-template-columns: 1fr !important; }
+
+  /* Reduce inner padding on cards */
+  .about-grid > div,
+  .skills-grid > div,
+  .contact-grid > div {
+    padding: 20px !important;
+  }
+}

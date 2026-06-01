@@ -56,7 +56,7 @@ export default function Hero() {
 
       {/* Left: Text content */}
       <div style={{ position: "relative", zIndex: 2, maxWidth: 1140, margin: "0 auto", padding: "120px 28px 80px", width: "100%" }}>
-        <div style={{ maxWidth: 580 }}>
+        <div style={{ maxWidth: 580 }} className="hero-content">
           <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5 }}>
             <span style={{
               display: "inline-flex", alignItems: "center", gap: 8,
@@ -93,6 +93,7 @@ export default function Hero() {
           </motion.p>
 
           <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.55, delay: 0.4 }}
+            className="hero-buttons"
             style={{ display: "flex", gap: 14, flexWrap: "wrap" }}>
             <button onClick={() => document.querySelector("#projects")?.scrollIntoView({ behavior: "smooth" })}
               style={{ padding: "13px 30px", borderRadius: 100, background: "linear-gradient(135deg, #7c3aed, #06b6d4)", color: "#fff", fontWeight: 700, fontSize: 14, border: "none", cursor: "pointer", transition: "all 0.25s", boxShadow: "0 4px 20px rgba(124,58,237,0.4)", fontFamily: "inherit" }}
@@ -110,6 +111,7 @@ export default function Hero() {
 
           {/* Stats */}
           <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.55, delay: 0.55 }}
+            className="hero-stats"
             style={{ display: "flex", gap: 32, marginTop: 44 }}>
             {[["5+", "Projects Built"], ["2+", "Years Learning"], ["2", "Certifications"]].map(([num, label]) => (
               <div key={label}>
@@ -162,7 +164,12 @@ export default function Hero() {
       </motion.div>
 
       <style>{`
-        @media (max-width: 768px) { .hero-photo { display: none; } }
+        @media (max-width: 768px) {
+          .hero-photo { display: none !important; }
+          .hero-content { max-width: 100% !important; }
+          .hero-buttons { flex-direction: column !important; align-items: flex-start !important; }
+          .hero-stats { gap: 20px !important; }
+        }
       `}</style>
     </section>
   );
