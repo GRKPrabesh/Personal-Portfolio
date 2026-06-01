@@ -31,7 +31,7 @@ export default function About() {
           </h2>
         </motion.div>
 
-        <div style={{ display: "grid", gridTemplateColumns: "1fr 1.6fr", gap: 64, alignItems: "center" }} className="about-grid">
+        <div className="about-grid">
           {/* Left: quick info cards */}
           <motion.div initial={{ opacity: 0, x: -30 }} animate={inView ? { opacity: 1, x: 0 } : {}} transition={{ duration: 0.6, delay: 0.1 }}
             style={{ display: "flex", flexDirection: "column", gap: 16 }}>
@@ -63,7 +63,7 @@ export default function About() {
             </h3>
             <p style={{ fontSize: 15, color: "#64748b", lineHeight: 1.85, marginBottom: 32 }}>{personalInfo.bio}</p>
 
-            <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 10, marginBottom: 32 }}>
+            <div className="traits-grid">
               {traits.map((trait, i) => (
                 <motion.div key={trait.label}
                   initial={{ opacity: 0, y: 12 }} animate={inView ? { opacity: 1, y: 0 } : {}}
@@ -94,7 +94,7 @@ export default function About() {
           </motion.div>
         </div>
       </div>
-      <style>{`@media(max-width:768px){.about-grid{grid-template-columns:1fr !important;gap:48px !important;}}`}</style>
+      <style>{``}</style>
     </section>
   );
 }

@@ -74,14 +74,10 @@ export default function Projects() {
           <p style={{ fontSize: 14, color: "#475569", maxWidth: 420, margin: "0 auto" }}>A selection of projects across web development, databases, and desktop apps.</p>
         </motion.div>
 
-        <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 22 }} className="projects-grid">
+        <div className="projects-grid">
           {projects.map((p, i) => <ProjectCard key={p.title} project={p} index={i} inView={inView} />)}
         </div>
       </div>
-      <style>{`
-        @media(max-width:900px){.projects-grid{grid-template-columns:repeat(2,1fr) !important;}}
-        @media(max-width:600px){.projects-grid{grid-template-columns:1fr !important;}}
-      `}</style>
     </section>
   );
 }

@@ -84,7 +84,7 @@ export default function Contact() {
           <p style={{ fontSize: 14, color: "#475569", maxWidth: 360, margin: "0 auto" }}>Have a project in mind or just want to say hi? My inbox is always open.</p>
         </motion.div>
 
-        <div style={{ display: "grid", gridTemplateColumns: "1fr 1.5fr", gap: 28 }} className="contact-grid">
+        <div className="contact-grid">
           {/* Info */}
           <motion.div initial={{ opacity: 0, x: -24 }} animate={inView ? { opacity: 1, x: 0 } : {}} transition={{ duration: 0.55, delay: 0.1 }}
             style={{ display: "flex", flexDirection: "column", gap: 16 }}>
@@ -164,7 +164,6 @@ export default function Contact() {
           </motion.div>
         </div>
       </div>
-      <style>{`@media(max-width:768px){.contact-grid{grid-template-columns:1fr !important;}}`}</style>
     </section>
   );
 }

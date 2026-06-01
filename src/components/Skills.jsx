@@ -40,7 +40,7 @@ export default function Skills() {
           </h2>
         </motion.div>
 
-        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 28 }} className="skills-grid">
+        <div className="skills-grid">
           <motion.div initial={{ opacity: 0, y: 24 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.55, delay: 0.1 }}
             style={{ background: "linear-gradient(145deg, rgba(124,58,237,0.06), rgba(6,182,212,0.03))", borderRadius: 24, padding: 32, border: "1px solid rgba(124,58,237,0.12)", backdropFilter: "blur(10px)" }}>
             <p style={{ fontSize: 11, fontWeight: 700, color: "#7c3aed", letterSpacing: "0.14em", textTransform: "uppercase", marginBottom: 28 }}>Proficiency</p>
@@ -66,7 +66,7 @@ export default function Skills() {
           </div>
         </div>
       </div>
-      <style>{`@media(max-width:768px){.skills-grid{grid-template-columns:1fr !important;}}`}</style>
+      <style>{``}</style>
     </section>
   );
 }

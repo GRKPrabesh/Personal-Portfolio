@@ -42,7 +42,7 @@ export default function Certifications() {
           </h2>
         </motion.div>
 
-        <div style={{ display: "grid", gridTemplateColumns: "repeat(2, 1fr)", gap: 22 }} className="cert-grid">
+        <div className="cert-grid">
           {certifications.map((cert, i) => {
             const Icon = certIconMap[i];
             return (
@@ -85,7 +85,6 @@ export default function Certifications() {
           })}
         </div>
       </div>
-      <style>{`@media(max-width:640px){.cert-grid{grid-template-columns:1fr !important;}}`}</style>
     </section>
   );
 }
