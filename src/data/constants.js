@@ -117,3 +117,42 @@ export const certifications = [
     color: "#1BA0D7",
   },
 ];
+
+export const activities = [
+  {
+    title: "Ace Spectrum 2024 — Team Titans",
+    date: "2024",
+    tag: "Competition",
+    tagColor: "#f59e0b",
+    description:
+      "Represented PCPS College as Team Titans at Ace Spectrum 2024, a three-day inter-college event held at Ace Institute of Management, Baneshwor. Competed alongside four teammates across multiple challenges, showcasing teamwork, creativity, and problem-solving skills.",
+    imageKey: "aceSpectrum",
+  },
+  {
+    title: "AI Training at Bernhardt College",
+    date: "2025",
+    tag: "Speaker",
+    tagColor: "#7c3aed",
+    description:
+      "Delivered a hands-on session on the practical use of Artificial Intelligence at Bernhardt College, introducing students to real-world AI tools and their applications in everyday workflows.",
+    imageKey: "training",
+  },
+  {
+    title: "Leo Club District Council Meeting",
+    date: "2024",
+    tag: "Leadership",
+    tagColor: "#06b6d4",
+    description:
+      "Represented and participated in the Leo Club District Council Meeting held in Dhulikhel, engaging with district leaders to discuss club initiatives and community development plans.",
+    imageKey: "leoDistrict",
+  },
+  {
+    title: "Leo Club Free Dental Camp",
+    date: "2024",
+    tag: "Community Service",
+    tagColor: "#10b981",
+    description:
+      "Actively participated in a Free Dental Camp organized by Leo Club of Kathmandu Dreamers, helping provide free dental check-ups and awareness to underserved communities.",
+    imageKey: "leoDental",
+  },
+];

@@ -11,6 +11,8 @@ import Contact from "./components/Contact";
 import Footer from "./components/Footer";
 import ResumePage from "./components/ResumePage";
 
+import Activities from "./components/Activities";
+
 function App() {
   const [showResume, setShowResume] = useState(false);
 
@@ -32,6 +34,7 @@ function App() {
         <Projects />
         <Experience />
         <Certifications />
+        <Activities />
         <Contact />
       </main>
       <Footer />
