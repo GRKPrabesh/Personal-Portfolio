@@ -10,7 +10,7 @@ export const personalInfo = {
   bio: "Currently navigating the intersection of technology and strategy, blending experience in IT projects with a deep dive into Business and Marketing. I believe the most impactful technical solutions are those driven by a clear market vision and a strong business case. I work as a software developer while engaging in branding, marketing, counselling, and career guidance — excited to connect with professionals passionate about bridging technical execution and business growth.",
   location: "Lalitpur, Nepal",
   email: "prabeshkattel40@gmail.com",
-  linkedin: "https://www.linkedin.com/in/prabesh-kattel-9a09932a5",
+  linkedin: "https://www.linkedin.com/in/prabesh-kattel-9a09932a5/?isSelfProfile=true",
   github: "https://github.com/GRKPrabesh",
 };
 
