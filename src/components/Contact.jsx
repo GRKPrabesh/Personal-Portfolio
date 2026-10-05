@@ -112,8 +112,8 @@ export default function Contact() {
             viewport={{ once: true }} transition={{ duration: 0.55, delay: 0.15 }}>
             <form onSubmit={handleSubmit} className="contact-form">
               {[
-                { id: "name",  label: "Your Name",  type: "text",  placeholder: "Prabesh Kattel" },
-                { id: "email", label: "Your Email", type: "email", placeholder: "you@example.com" },
+                { id: "name",  label: "Your Name",  type: "text" },
+                { id: "email", label: "Your Email", type: "email" },
               ].map(({ id, label, type, placeholder }) => (
                 <div key={id} className="form-group">
                   <label htmlFor={id} className="form-label">{label}</label>
