@@ -20,7 +20,17 @@ const CiscoIcon = () => (
   </svg>
 );
 
-const icons = [DatabricksIcon, CiscoIcon];
+const GoogleIcon = () => (
+  <svg width="36" height="36" viewBox="0 0 100 100" fill="none">
+    <rect width="100" height="100" rx="18" fill="#fff" />
+    <path d="M91.7 51.1c0-2.9-.3-5.7-.8-8.4H51v15.9h22.9c-1 5.3-4 9.8-8.5 12.8v10.6h13.8c8.1-7.5 12.5-18.5 12.5-30.9z" fill="#4285F4" />
+    <path d="M51 93c11.5 0 21.2-3.8 28.2-10.3L65.4 72.1C61.6 74.6 56.7 76 51 76c-11.1 0-20.5-7.5-23.9-17.6H13.7v11C20.7 83.5 35 93 51 93z" fill="#34A853" />
+    <path d="M27.1 58.4c-.9-2.5-1.3-5.2-1.3-8s.5-5.4 1.3-8V31.4H13.7A42.1 42.1 0 009 50.4c0 6.8 1.6 13.2 4.7 18.9l13.4-11z" fill="#FBBC05" />
+    <path d="M51 24.8c6.3 0 11.9 2.2 16.3 6.4l12.2-12.2C71.2 12 61.5 8 51 8 35 8 20.7 17.5 13.7 31.4l13.4 10.9C30.5 32.3 39.9 24.8 51 24.8z" fill="#EA4335" />
+  </svg>
+);
+
+const icons = [DatabricksIcon, CiscoIcon, GoogleIcon];
 
 export default function Certifications() {
   return (

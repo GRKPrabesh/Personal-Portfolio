@@ -10,7 +10,7 @@ export const personalInfo = {
   bio: "Currently navigating the intersection of technology and strategy, blending experience in IT projects with a deep dive into Business and Marketing. I believe the most impactful technical solutions are those driven by a clear market vision and a strong business case. I work as a software developer while engaging in branding, marketing, counselling, and career guidance — excited to connect with professionals passionate about bridging technical execution and business growth.",
   location: "Lalitpur, Nepal",
   email: "prabeshkattel40@gmail.com",
-  linkedin: "https://www.linkedin.com/in/prabesh-kattel-9a09932a5/?isSelfProfile=true",
+  linkedin: "https://www.linkedin.com/in/prabesh-kattel-9a09932a5",
   github: "https://github.com/GRKPrabesh",
 };
 
@@ -115,6 +115,14 @@ export const certifications = [
     credentialId: null,
     url: "https://www.netacad.com/",
     color: "#1BA0D7",
+  },
+  {
+    title: "Introduction to Generative AI",
+    issuer: "Google",
+    issued: "2024",
+    credentialId: null,
+    url: "https://www.skills.google/public_profiles/dc39e33e-887d-47c8-aa7c-1e6478068641/badges/28869619",
+    color: "#4285F4",
   },
 ];
 
